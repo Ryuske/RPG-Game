@@ -1,0 +1,7 @@
+author=Kenyon
+description=Some Game
+name=RPG Game
+screen_height=448
+screen_width=736
+script=main.js
+

@@ -1,0 +1,46 @@
+A game made using the Sphere game engine.
+
+Things Current Working On (Kenyon):
+    Add to git
+
+Stuff TODO (in order):
+    Add spritesets for NPCs
+    Add an NPC
+    Add NPC path mapping
+    Add conversing with NPCS
+
+    Create a functional map
+        General store
+        Bank
+        Battle-prone area
+        Including the insides of the buildings
+    Add switching maps
+
+    Add a questing system
+    Add a battle system
+        Graphical layout
+        Enemies
+    Add a "you died" screen
+
+    Add an item system
+        combat & non-combat items
+    Add a backpack
+    Add bank system
+
+    Finish player stats (also adding classes and what-not)
+    Add spritesets for different player classes
+    Add player equipment
+
+    Make shops functional
+
+    Add a title screen
+    Add networking (login, levels, etc)
+    Add functional chat system
+    See if I can add scrolling on panels
+    Add multiplayer
+        Multiple people on the map
+        Friends list
+        Ignore list
+
+    Make a website for the game
+    Add a registration/sign-up form (might end up just being a web-page)
