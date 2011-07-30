@@ -1,7 +1,3 @@
-/************************
- *Need to work on collision detection. Should make a collision function, needs more accurate detecting, right now it's too "specific"
- */
-
 function movement(speed) {
     this.beta = {x: 0, y: 0};
     this.alpha = {x: GetPersonX(player.name), y: GetPersonY(player.name)};
