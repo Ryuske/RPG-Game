@@ -4,6 +4,7 @@ RequireScript("variables.js");
 RequireScript("mouse.js");
 RequireScript("menus.js");
 RequireScript("panels.js");
+RequireScript("collision.js");
 RequireScript("movement.js");
 
 function game() {
@@ -12,14 +13,21 @@ function game() {
 
 function play() {
 	CreatePerson(player.name, "character.rss", false);
-	AttachCamera(player.name);
+    AttachCamera(player.name);
 	AttachInput(player.name);
-    SetUpdateScript('movement(1);');
-    SetRenderScript('update();');
+    SetUpdateScript('update();');
+    SetRenderScript('render();');
     MapEngine("main.rmp", 60);
 }
 
 function update() {
+    movement(1);
+    for (var i in npcs) {
+        npc_movement(npcs[i], 1);
+    }
+}
+
+function render() {
     mouse.draw();
     //************Showcasing Mouse Destroying & Rendering, not used for anything*****************/
     if (IsKeyPressed(KEY_F1)) {
