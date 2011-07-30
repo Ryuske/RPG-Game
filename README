@@ -1,9 +1,6 @@
 A game made using the Sphere game engine.
 
 Stuff TODO (in order):
-    Add spritesets for NPCs
-    Add an NPC
-    Add NPC path mapping
     Add conversing with NPCS
 
     Create a functional map
