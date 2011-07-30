@@ -28,15 +28,8 @@ function update() {
 }
 
 function render() {
+    panelInfo();
+    panelChat();
+    
     mouse.draw();
-    //************Showcasing Mouse Destroying & Rendering, not used for anything*****************/
-    if (IsKeyPressed(KEY_F1)) {
-        mouse.destroy();
-    }
-    if (IsKeyPressed(KEY_F2)) {
-        mouse.render();
-    }
-    //********************************End Showcase**********************************************/
-    panelInfo(panel_text.info);
-    panelChat(panel_text.chat);
 }

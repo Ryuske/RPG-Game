@@ -1,15 +1,9 @@
-function panelInfo(text) {
-    this.windowStyle = GetSystemWindowStyle();
-    this.font = GetSystemFont();
-    this.dimensions = {x: GetScreenWidth()-170, y: 10, w: 170, h: GetScreenHeight()};
-    this.windowStyle.drawWindow(this.dimensions.x, this.dimensions.y, this.dimensions.w, this.dimensions.h);
-    this.font.drawTextBox(this.dimensions.x, this.dimensions.y, this.dimensions.w, this.dimensions.h, 0, text);
+function panelInfo(operation) {
+    windowStyle.drawWindow(panels.info.dimensions.x, panels.info.dimensions.y, panels.info.dimensions.w, panels.info.dimensions.h);
+    font.drawTextBox(panels.info.dimensions.x, panels.info.dimensions.y, panels.info.dimensions.w, panels.info.dimensions.h, 0, panels.info.text);
 }
 
-function panelChat(text) {
-    this.windowStyle = GetSystemWindowStyle();
-    this.font = GetSystemFont();
-    this.dimensions = {x: 10, y: GetScreenHeight()-60, w: GetScreenWidth()-202, h: 60};
-    this.windowStyle.drawWindow(this.dimensions.x, this.dimensions.y, this.dimensions.w, this.dimensions.h);
-    this.font.drawTextBox(this.dimensions.x, this.dimensions.y, this.dimensions.w, this.dimensions.h, 0, text);
+function panelChat() {
+    windowStyle.drawWindow(panels.chat.dimensions.x, panels.chat.dimensions.y, panels.chat.dimensions.w, panels.chat.dimensions.h);
+    font.drawTextBox(panels.chat.dimensions.x, panels.chat.dimensions.y, panels.chat.dimensions.w, panels.chat.dimensions.h, 0, panels.chat.text);
 }
