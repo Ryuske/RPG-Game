@@ -30,7 +30,7 @@ function movement(speed) {
 		SetPersonFrame(player.name, 1);
     }
 
-    if (this.moving === true && !collision(player.name, this.alpha.x+this.beta.x, this.alpha.y+this.beta.y)) {
+    if (this.moving === true && !collision(player.name, this.alpha.x+this.beta.x, this.alpha.y+this.beta.y) && player.inChat === false) {
 		QueuePersonCommand(player.name, COMMAND_ANIMATE, true);
         SetPersonX(player.name, this.alpha.x+this.beta.x);
         SetPersonY(player.name, this.alpha.y+this.beta.y);

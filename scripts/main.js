@@ -2,16 +2,22 @@ RequireSystemScript("menu.js");
 
 RequireScript("variables.js");
 RequireScript("mouse.js");
+RequireScript("functions.js");
 RequireScript("menus.js");
 RequireScript("panels.js");
+RequireScript("npcs.js");
 RequireScript("collision.js");
 RequireScript("movement.js");
+RequireScript("chat.js");
 
 function game() {
     menuMain();
 }
 
 function play() {
+    SetTalkActivationKey(KEY_T);
+    link = new link();
+
 	CreatePerson(player.name, "character.rss", false);
     AttachCamera(player.name);
 	AttachInput(player.name);
@@ -29,7 +35,12 @@ function update() {
 
 function render() {
     panelInfo();
-    panelChat();
-    
+    if (player.inChat === false) {
+        panelGameChat();
+    } else {
+        panelNpcChat();
+        panels.npcChat.chat.render();
+    }
+    link.checkLinks();
     mouse.draw();
 }
