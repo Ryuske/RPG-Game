@@ -1,18 +1,17 @@
-mouse.render = function() {
-    this.destroyed = false;
-    mouse.draw();
+mouse.render = function(where) {
+    this.on = where;
+    panels.chat.text = this.on;
+    this.draw();
 }
 
 mouse.destroy = function() {
-    this.destroyed = true;
+    this.on = "destroyed";
     FlipScreen();
 }
 
 mouse.draw = function() {
-    if (!this.destroyed) {
-        this.x = GetMouseX();
-        this.y = GetMouseY();
-        this.image.blit(this.x, this.y);
+    if (this.on != "destroyed") {
+        this.image.blit(GetMouseX(), GetMouseY());
 
         if (!IsMouseButtonPressed(MOUSE_LEFT)) this.leftButtonDown = false;
         if (!IsMouseButtonPressed(MOUSE_RIGHT)) this.rightButtonDown = false;
