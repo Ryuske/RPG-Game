@@ -1,8 +1,6 @@
 A game made using the Sphere game engine.
 
 Stuff TODO (in order):
-    Add conversing with NPCS
-
     Create a functional map
         General store
         Bank
@@ -11,6 +9,11 @@ Stuff TODO (in order):
     Add switching maps
 
     Add a questing system
+    
+    Finish player stats (also adding classes and what-not)
+    Add spritesets for different player classes
+    Add player equipment
+
     Add a battle system
         Graphical layout
         Enemies
@@ -20,10 +23,6 @@ Stuff TODO (in order):
         combat & non-combat items
     Add a backpack
     Add bank system
-
-    Finish player stats (also adding classes and what-not)
-    Add spritesets for different player classes
-    Add player equipment
 
     Make shops functional
 
