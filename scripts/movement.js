@@ -38,10 +38,6 @@ function movement(speed) {
     }
 }
 
-/********************************
- * http://spheredev.org/smforums/index.php?topic=3822.0
- * Will need an array, declaring each NPC. Array should include name, starting x & y
- */
 function npc_movement(npc, speed) {
     this.beta = {x: 0, y: 0};
     this.alpha = {x: GetPersonX(npc.name), y: GetPersonY(npc.name)};
