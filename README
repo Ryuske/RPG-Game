@@ -1,17 +1,7 @@
 A game made using the Sphere game engine.
 
 Stuff TODO (in order):
-    Create a functional map
-        General store
-        Bank
-        Battle-prone area
-        Including the insides of the buildings
-    Add switching maps
-
-    Add a questing system
-    
     Finish player stats (also adding classes and what-not)
-    Add spritesets for different player classes
     Add player equipment
 
     Add a battle system
@@ -23,6 +13,10 @@ Stuff TODO (in order):
         combat & non-combat items
     Add a backpack
     Add bank system
+
+    Add a questing system
+    
+    Add spritesets for different player classes
 
     Make shops functional
 
