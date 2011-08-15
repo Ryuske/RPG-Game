@@ -29,6 +29,12 @@ link.prototype.checkLinks = function() {
 }
 
 function WarpMap(map, x, y) {
+    if (x === undefined) {
+        x = GetPersonX(player.name);
+    }
+    if (y === undefined) {
+        y = GetPersonY(player.name);
+    }
     FadeOut(500);
     ChangeMap(map);
     SetPersonX(player.name, x);

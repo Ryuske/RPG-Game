@@ -43,5 +43,17 @@ function addNpc(npc, movement) {
                         ]
             }
             break;
+        case "General Store Clerk":
+            npcs[2] = {
+                        id: 2,
+                        name: "General Store Clerk",
+                        movement: movement,
+                        player_chat: 0,
+                        need_response: false,
+                        chat: [
+                            ["Can I help you?", "end"]
+                        ]
+            }
+            break;
     }
 }
