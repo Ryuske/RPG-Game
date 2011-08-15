@@ -1,4 +1,5 @@
 RequireSystemScript("menu.js");
+RequireSystemScript("screen.js");
 
 RequireScript("variables.js");
 RequireScript("mouse.js");
@@ -27,9 +28,15 @@ function play() {
 }
 
 function update() {
-    movement(1);
+    var speed = 1; //Remove for delta version
+    if (IsKeyPressed(KEY_R)) {
+        speed = 3;
+    }
+    movement(speed);
     for (var i in npcs) {
-        npc_movement(npcs[i], 1);
+        if (npcs[i].movement) {
+            npc_movement(npcs[i], 1);
+        }
     }
 }
 
@@ -40,6 +47,11 @@ function render() {
     } else {
         panelNpcChat();
         panels.npcChat.chat.render();
+    }
+    if (IsKeyPressed(GetTalkActivationKey())) {
+        for (var i=0; i<=31; i++) {
+            SetTalkDistance(i);
+        }
     }
     link.checkLinks();
     mouse.draw();

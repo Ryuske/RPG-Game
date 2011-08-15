@@ -27,3 +27,13 @@ link.prototype.checkLinks = function() {
         }
     }
 }
+
+function WarpMap(map, x, y) {
+    FadeOut(500);
+    ChangeMap(map);
+    SetPersonX(player.name, x);
+    SetPersonY(player.name, y);
+    UpdateMapEngine();
+    RenderMap();
+    FadeIn(500);
+}

@@ -9,21 +9,21 @@ var player = {
 var npcs = []; //Refer to npcs.js for explaination on how this array is built
 
 var panels = {
-    info: {
+    info: { //Need to make map 11 tiles wider than actually wanted.
         dimensions: {
-            x: GetScreenWidth()-170,
+            x: GetScreenWidth()-164,
             y: 10,
-            w: 170,
+            w: 164,
             h: GetScreenHeight()
         },
         text: "Name: " + player.name + "\nGold: " + player.gold + "\n\nAttack Level: " + player.attack_level + "\nDefense Level: " + player.defense_level + "\n\n\nMore Stuff To Be Added Later..."
     },
-    chat: {
+    chat: { //Need to make map 5 tiles heigher than actually wanted.
         dimensions: {
-            x: 10,
-            y: GetScreenHeight()-60,
-            w: GetScreenWidth()-202,
-            h: 60
+            x: 9,
+            y: GetScreenHeight()-68,
+            w: GetScreenWidth()-196,
+            h: 68
         },
         text: "Welcome to some RPG game!"
     },

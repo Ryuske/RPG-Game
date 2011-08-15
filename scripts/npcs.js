@@ -1,9 +1,14 @@
-function addNpc(npc) {
+function addNpc(npc, movement) {
+    if (movement === undefined) {
+        movement = true;
+    }
+
     switch (npc) {
         case "Kai":
             npcs[0] = {
                         id: 0, //NPCs id number
                         name: "Kai",
+                        movement: movement, //If the NPC should move or not
                         origin_x: GetPersonX("Kai"), //Where the NPC starts
                         origin_y: GetPersonY("Kai"), //Same as origin_x
                         current_x: GetPersonX("Kai"), //The current map position of the NPC (might be deprecated)
@@ -23,8 +28,20 @@ function addNpc(npc) {
                             ],
                             ["Fantastic!", "end"],
                             ["Aw, I'm sorry.", "end"]
-                        ] //Chat dialog for this NPC, refer to chat.js
+                        ]
                     };
+            break;
+        case "banker":
+            npcs[1] = {
+                        id: 1,
+                        name: "banker",
+                        movement: movement,
+                        player_chat: 0,
+                        need_response: false,
+                        chat: [
+                            ["Welcome to the bank!", "end"]
+                        ]
+            }
             break;
     }
 }

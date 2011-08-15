@@ -27,7 +27,6 @@ function chatNext(dialog) {
                         npcs[player.inChat].need_response = false;
                     }
                 } else {
-                    panels.info.text = "Koala";
                     panels.npcChat.text = npcs[player.inChat].chat[dialog][0];
                     npcs[player.inChat].need_response = true;
                     panels.npcChat.chat.addLink("next");
