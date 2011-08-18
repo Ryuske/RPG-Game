@@ -1,25 +1,29 @@
 /*******************
  * Classes: Refer to Google Docs "Character Information" for a list of available classes
  * Occupations: Refer to Google Docs "Character Information" for a list of available occupations
+ *
+ * All weights are in pounds, at the moment
  */
+function recover(type, amount) {
+}
+
 var player = {
     name: 'Ryuske',
-    gender: 'male',
-    weight: '155lbs',
+    gender: 'Male',
+    weight: '155',
     inChat: false,
-    gold: '500',
-    class: 'ninja',
-    occupation: 'blacksmith',
+    char_class: 'Ninja',
+    occupation: 'Blacksmith',
     emotions: {
         happiness: '100', //Effects combat, if happy and moral is good: stats +; if happy and moral is evil: stats -
         anger: '0', //Effects combat, if moral is good, lower number = greater stats boost; Visa versa for evil moral
         depression: '0', //Effects combat, lower number = greater stats boost, regardless of moral
         hunger: '0', //Effects combat, lower number = greater stats boost, regeadless of moral; If number >= 75 effects health similarly to poision
-        romatics: { //Not sure what this effects as of yet
-            name: 'none', //Player name/id
+        romantics: { //Not sure what this effects as of yet
+            name: 'No-one', //Player name/id
             deepness: '0' //How in-love you are
         }
-    }
+    },
     stats: {
         moral: '0', //Negative is evil, positive is good. -100-100
         infection: 'none', //Refer to Google Docs "Character Information"
@@ -39,26 +43,155 @@ var player = {
     },
     union_skills: {
         thievery: '1',
-        education: '1',
         carpentry: '1',
         smithery: '1',
         mining: '1',
         herbology: '1',
         cooking: '1'
+    },
+    backpack: {current_pocket: 'S/E', pockets: ''},
+    equipment: {
+        weapon: 'Copper Ninjato',
+        armor: 'Silk Shozoku',
+        amulet: 'None',
+        ring: 'None',
     }
-}
+};
+
+var items = [
+    //Union items
+    'Gold',
+    {
+        description: 'It\'s kind of heavy, but it sure looks pretty!'
+    },
+    'Potion',
+    {
+        description: 'Heals some health',
+        price: '150',
+        callback: [recover, 'health', 10]
+    },
+    'Elixr',
+    {
+        description: 'Recovers some endurance',
+        price: '150',
+        callback: [recover, 'edurence', 10]
+    },
+    'Copper Ore',
+    {
+        name: 'Copper Ore',
+        description: 'Some raw copper',
+        price: '50'
+    },
+    //Weapons
+    'Copper Ninjato',
+    {
+        description: 'A flimsy, short, straight sword',
+        char_class: 'Ninja',
+        weight: '5',
+        attack: '1'
+    },
+    'Copper Katana',
+    {
+        description: 'A sword, used for cutting through bambo... And enemies.',
+        char_class: 'Samurai',
+        weight: '7',
+        attack: '1'
+    },
+    'Copper Broad Sword',
+    {
+        description: 'A giant sword made of copper.',
+        char_class: 'Warrior',
+        weight: '14',
+        attack: '2'
+    },
+    'Pine Bow',
+    {
+        description: 'A bow for an archer',
+        char_class: 'Archer',
+        weight: '3',
+        attack: '1'
+    },
+    'Pine Arrow',
+    {
+        description: 'An arrow crafted out of pine wood',
+        char_class: 'Archer',
+        weight: '0.5',
+        attack: '1'
+    },
+    'Pine Staff',
+    {
+        description: 'A staff with magical powers flowing through it',
+        char_class: 'Mage',
+        weight: '5',
+        attack: '1'
+    },
+    //Armor
+    'Silk Shozoku',
+    {
+        description: 'A fine cloak for a fine Ninja',
+        char_class: 'Ninja',
+        weight: '1',
+        defense: '1'
+    },
+    'Copper Wafu',
+    {
+        description: 'Now that\'s scary looking...',
+        char_class: 'Samurai',
+        weight: '10',
+        defense: '1'
+    },
+    'Copper Platemail',
+    {
+        description: 'Looks heavy',
+        char_class: 'Warrior',
+        weight: '10',
+        defense: '1'
+    },
+    'Silk Tunic',
+    {
+        description: 'Looks a little fancy for forrest fighting...',
+        char_class: 'Archer',
+        weight: '1',
+        defense: '1'
+    },
+    'Silk Robe',
+    {
+        description: 'Looks magical',
+        char_class: 'Mage',
+        weight: '1',
+        defense: '1'
+    }
+];
 
 var npcs = []; //Refer to npcs.js for explaination on how this array is built
 
+var windowStyle = GetSystemWindowStyle();
+var font = GetSystemFont();
+
 var panels = {
-    info: { //Need to make map 11 tiles wider than actually wanted.
+    buttons: { //Used to change info panel infomation
         dimensions: {
             x: GetScreenWidth()-164,
             y: 10,
             w: 164,
+            h: 35
+        },
+        button: [
+            {x: [GetScreenWidth()-37.3*5, 33/2-font.getStringWidth('S/E')/2], y: [-1.5, font.getHeight()/1.5], w: 33, h: 30, visual: ['0, 0, 0', 'S/E'], callback: {callback: switchInfoPanel, params: 'S/E'}},
+            {x: [GetScreenWidth()-38*4, 33/2-font.getStringWidth('SKL')/2], y: [-1.5, font.getHeight()/1.5], w: 33, h: 30, visual: ['0, 0, 0', 'SKL'], callback: {callback: switchInfoPanel, params: 'SKL'}},
+            {x: [GetScreenWidth()-38.9*3, 33/2-font.getStringWidth('BPK')/2], y: [-1.5, font.getHeight()/1.5], w: 33, h: 30, visual: ['0, 0, 0', 'BPK'], callback: {callback: switchInfoPanel, params: 'BPK'}},
+            {x: [GetScreenWidth()-40.9*2, 33/2-font.getStringWidth('EQP')/2], y: [-1.5, font.getHeight()/1.5], w: 33, h: 30, visual: ['0, 0, 0', 'EQP'], callback: {callback: switchInfoPanel, params: 'EQP'}},
+            {x: [GetScreenWidth()-46.5, 33/2-font.getStringWidth('CBT')/2], y: [-1.5, font.getHeight()/1.5], w: 33, h: 30, visual: ['0, 0, 0', 'CBT'], callback: {callback: switchInfoPanel, params: 'CBT'}}
+        ]
+    },
+    info: { //Need to make map 11 tiles wider than actually wanted.
+        dimensions: {
+            x: GetScreenWidth()-164,
+            y: 45,
+            w: 164,
             h: GetScreenHeight()
         },
-        text: "Name: " + player.name + "\nGold: " + player.gold + "\n\nAttack Level: " + player.attack_level + "\nDefense Level: " + player.defense_level + "\n\n\nMore Stuff To Be Added Later..."
+        text: ''
     },
     chat: { //Need to make map 5 tiles heigher than actually wanted.
         dimensions: {
@@ -84,6 +217,3 @@ var mouse = {
 };
 
 var link; //Link object, defined in play()
-
-var windowStyle = GetSystemWindowStyle();
-var font = GetSystemFont();

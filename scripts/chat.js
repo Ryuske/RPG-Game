@@ -42,6 +42,8 @@ function chatNext(dialog) {
             }
         } else {
             player.inChat = false;
+            panels.npcChat.chat.removeLinks();
+            link.removeLinks();
         }
     }
 }

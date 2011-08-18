@@ -1,13 +1,9 @@
 A game made using the Sphere game engine.
 
-Stuff TODO (in order):
-    Add an item system                                                                                                                                                          
-        combat & non-combat items
-    Add player equipment
-        Combat
+Known Bugs:
 
+Stuff TODO (in order):
     Add a battle system
-        Graphical layout
         Enemies
     Add a "you died" screen
 
@@ -32,8 +28,10 @@ Stuff TODO (in order):
 
 Stuff TODO (misc.):
     Add spritesets for different player classes & genders
-    Figure out how to make the game modular, so need features can easily be added
+    Figure out how to make the game modular, so new features can easily be added
     Add skills, and how to level them/how they affect the game
     Come up with a name for the game
     Figure out how magic is going to work
     Figure out if I can make the game open-source and still make money (figure out how much I should open-source)
+    Add a right-click meny for items
+    Add picking items up (possibly using the mouse, similar to RS. However, this would possibly require pathing and clicking to move...)
