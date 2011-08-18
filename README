@@ -7,7 +7,6 @@ Stuff TODO (in order):
         Enemies
     Add a "you died" screen
 
-    Add a backpack
     Add bank system
 
     Add a questing system
@@ -17,7 +16,6 @@ Stuff TODO (in order):
     Add a title screen
     Add networking (login, levels, etc)
     Add functional chat system
-    See if I can add scrolling on panels
     Add multiplayer
         Multiple people on the map
         Friends list
@@ -27,6 +25,8 @@ Stuff TODO (in order):
     Add a registration/sign-up form (might end up just being a web-page)
 
 Stuff TODO (misc.):
+    Add scrolling to panels.
+    Figure out how to give callbacks params. May possibly be able to do something like funcName(addParams()); where addParams is a for loop.
     Add spritesets for different player classes & genders
     Figure out how to make the game modular, so new features can easily be added
     Add skills, and how to level them/how they affect the game
