@@ -22,10 +22,10 @@ function chatNext(dialog) {
         if (dialog < npcs[player.inChat].chat.length) {
             if (npcs[player.inChat].chat[dialog][1] == "response") {
                 if (npcs[player.inChat].need_response) {
-                    for (var i in npcs[player.inChat].chat[dialog][2]) {
-                        panels.npcChat.chat.addLink(npcs[player.inChat].chat[dialog][2][i][0], {callback: chatNext, params: npcs[player.inChat].chat[dialog][2][i][1]});
-                        npcs[player.inChat].need_response = false;
-                    }
+                    foreach(npcs[player.inChat].chat[dialog][2], "\
+                        panels.npcChat.chat.addLink(npcs[player.inChat].chat[dialog][2][i][0], {callback: chatNext, params: npcs[player.inChat].chat[dialog][2][i][1]}); \
+                        npcs[player.inChat].need_response = false; \
+                    ");
                 } else {
                     panels.npcChat.text = npcs[player.inChat].chat[dialog][0];
                     npcs[player.inChat].need_response = true;
@@ -72,9 +72,9 @@ chatLinks.prototype.render = function() {
     link.removeLinks();
     if (this.links.length > 1) {
         this.spacing = panels.chat.dimensions.h/this.links.length;
-        for (var i in this.links) {
-            link.addLink((panels.chat.dimensions.w-font.getStringWidth(this.links[i].text))/2, GetScreenHeight()-panels.chat.dimensions.h+this.spacing*i, this.links[i].text, this.links[i].callback);
-        }
+        foreach(this.links, "\
+            link.addLink((panels.chat.dimensions.w-font.getStringWidth(this.links[i].text))/2, GetScreenHeight()-panels.chat.dimensions.h+this.spacing*i, this.links[i].text, this.links[i].callback); \
+        ");
     } else if (this.links.length > 0) {
         link.addLink((panels.chat.dimensions.w-font.getStringWidth(this.links[0].text))/2, GetScreenHeight()-22, this.links[0].text, this.links[0].callback);
     }

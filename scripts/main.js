@@ -12,6 +12,7 @@ RequireScript("movement.js");
 RequireScript("chat.js");
 RequireScript("variables.js");
 RequireScript("mouse.js");
+RequireScript("battle.js");
 
 function game() {
     menuMain();
@@ -23,6 +24,8 @@ function play() {
     link = new link();
     backpack = new backpack('Plain Backpack');
     popup = new popup();
+    battle = new battle();
+    battle.setStance(true);
 
 	CreatePerson(player.name, "character.rss", false);
     AttachCamera(player.name);
@@ -65,11 +68,14 @@ function update() {
     //End block
 
     movement(speed);
-    for (var i in npcs) {
-        if (npcs[i].movement) {
-            npc_movement(npcs[i], 1);
-        }
-    }
+    foreach(npcs, "\
+        if (npcs[i].movement) {\
+            npc_movement(npcs[i], 1);\
+        }\
+    ");
+
+    battle.setStance();
+    battle.isAttacking();
 }
 
 function render() {

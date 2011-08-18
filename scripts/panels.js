@@ -2,9 +2,10 @@ function panelButtons() {
     windowStyle.drawWindow(panels.buttons.dimensions.x, panels.buttons.dimensions.y, panels.buttons.dimensions.w, panels.buttons.dimensions.h);
     font.drawTextBox(panels.buttons.dimensions.x, panels.buttons.dimensions.y, panels.buttons.dimensions.w, panels.buttons.dimensions.h, 0, '');
 
-    for (var i in panels.buttons.button) {
-        link.addBlock(panels.buttons.button[i].x, panels.buttons.button[i].y, panels.buttons.button[i].w, panels.buttons.button[i].h, panels.buttons.button[i].visual, panels.buttons.button[i].callback);
-    }
+    panels.info.text = '';
+    foreach(panels.buttons.button, "\
+        link.addBlock(panels.buttons.button[i].x, panels.buttons.button[i].y, panels.buttons.button[i].w, panels.buttons.button[i].h, panels.buttons.button[i].visual, panels.buttons.button[i].callback); \
+    ");
 }
 
 function panelInfo(operation) {
