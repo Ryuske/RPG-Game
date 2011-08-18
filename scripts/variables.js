@@ -215,3 +215,5 @@ var mouse = {
 
 var link; //Link object, defined in play()
 var backpack; //Backpack object, defined in play()
+var popup;
+var popup_entities;

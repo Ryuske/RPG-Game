@@ -22,6 +22,7 @@ function play() {
     SetTalkDistance(31);
     link = new link();
     backpack = new backpack('Plain Backpack');
+    popup = new popup();
 
 	CreatePerson(player.name, "character.rss", false);
     AttachCamera(player.name);
@@ -57,6 +58,10 @@ function update() {
     if (IsKeyPressed(KEY_D)) {
         backpack.removeItem([2,2]);
     }
+
+    if (IsKeyPressed(KEY_P)) {
+        popup.addPopup('standard', ['Close', "So how does this work?"]);
+    }
     //End block
 
     movement(speed);
@@ -68,6 +73,7 @@ function update() {
 }
 
 function render() {
+    popup.render();
     panelButtons();
     switchInfoPanel(player.backpack.current_pocket);
     panelInfo();
