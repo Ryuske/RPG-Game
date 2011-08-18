@@ -1,7 +1,9 @@
 RequireSystemScript("menu.js");
 RequireSystemScript("screen.js");
 
+RequireScript("link.js");
 RequireScript("functions.js");
+RequireScript("backpack.js");
 RequireScript("menus.js");
 RequireScript("panels.js");
 RequireScript("npcs.js");
@@ -19,15 +21,15 @@ function play() {
     SetTalkActivationKey(KEY_T);
     SetTalkDistance(31);
     link = new link();
+    backpack = new backpack('Plain Backpack');
 
 	CreatePerson(player.name, "character.rss", false);
     AttachCamera(player.name);
 	AttachInput(player.name);
 
-    backpack('initalize', 'Plain Backpack');
     switchInfoPanel(player.backpack.current_pocket);
-    backpack('add', [1,0], 'Potion');
-    backpack('add', [2,2], 'Gold*500');
+    backpack.addItem([1,0], 'Potion');
+    backpack.addItem([2,2], 'Gold*500');
 
     SetUpdateScript('update();');
     SetRenderScript('render();');
@@ -50,10 +52,10 @@ function update() {
     }
 
     if (IsKeyPressed(KEY_M)) {
-        backpack('move', [1,0,3,1], 'Potion');
+        backpack.moveItem([1,0,3,1], 'Potion');
     }
     if (IsKeyPressed(KEY_D)) {
-        backpack('remove', [2,2]);
+        backpack.removeItem([2,2]);
     }
     //End block
 

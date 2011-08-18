@@ -4,9 +4,6 @@
  *
  * All weights are in pounds, at the moment
  */
-function recover(type, amount) {
-}
-
 var player = {
     name: 'Ryuske',
     gender: 'Male',
@@ -217,3 +214,4 @@ var mouse = {
 };
 
 var link; //Link object, defined in play()
+var backpack; //Backpack object, defined in play()
