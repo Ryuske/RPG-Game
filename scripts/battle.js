@@ -155,8 +155,7 @@ battle.prototype.draw = function(type) {
                     this.draw_type.animation.beta.y++; //South
                 }
             }
-            images.combat.melee_animation.blit(this.draw_type.animation.beta.x, this.draw_type.animation.beta.y);
-            panels.chat.text = "Alpha: " + this.draw_type.animation.alpha.x + ", " + this.draw_type.animation.alpha.y + "\nBeta: " + this.draw_type.animation.beta.    x + ", " + this.draw_type.animation.beta.y + "\nDirection: " + this.draw_type.animation.direction.x + ", " + this.draw_type.animation.direction.y;
+            images.combat.range_animation.blit(this.draw_type.animation.beta.x, this.draw_type.animation.beta.y);
             if ((this.draw_type.animation.direction.x-7) <= 0 && 0 <= (this.draw_type.animation.direction.x+7) && (this.draw_type.animation.direction.y-7) <= 0 && 0 <= (this.draw_type.animation.direction.y+7)) {
                 this.draw_type.animation.playing = false;
             }

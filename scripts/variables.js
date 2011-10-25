@@ -223,7 +223,8 @@ var images = {
     combat: {
         red: LoadImage('../images/combat/red_splat.jpg'),
         blue: LoadImage('../images/combat/blue_splat.jpg'),
-        melee_animation: LoadImage('../images/combat/melee_animation.jpg')
+        melee_animation: LoadImage('../images/combat/melee_animation.jpg'),
+        range_animation: LoadImage('../images/combat/range_animation.jpg')
     }
 }
 
