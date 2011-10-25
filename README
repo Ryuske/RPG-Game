@@ -6,6 +6,7 @@ Known Bugs:
     Can't remove popups while in a chat with an NPC
     Doors aren't forgiving enough
     Side panel (possibly chat panel too) slows down after switching (potentially caused by not undrawing them [or not undrawing something anyways])
+    *potential bug* Problems with deciding who is the enemy when multiple people are attacking
 
 Stuff TODO (in order):
     Add a battle system
@@ -44,3 +45,5 @@ Stuff TODO (misc.):
     Figure out how magic is going to work
     Add a right-click meny for items
     Add picking items up (possibly using the mouse, similar to RS. However, this would possibly require pathing and clicking to move...)
+    Covert everything to proper OOP (or, as close as I can get with JS)
+    Fix inconsistences with code

@@ -4,6 +4,7 @@ function movement(speed) {
     this.moving = false;
     this.facing;
     this.direction = {north: COMMAND_FACE_NORTH, east: COMMAND_FACE_EAST, south: COMMAND_FACE_SOUTH, west: COMMAND_FACE_WEST};
+    this.enemy = {beta: {x: 0, y: 0}, alpha: {x: false, y: 0}};
     solid = false;
 
     if (IsKeyPressed(KEY_UP) && !this.moving) {
@@ -26,14 +27,49 @@ function movement(speed) {
         this.facing = this.direction.west;
         QueuePersonCommand(player.name, this.facing, true);
         this.moving = true;
+    } else if (player.battle.enemy != '') {
+        this.enemy.alpha.x = GetPersonX(player.battle.enemy);
+        this.enemy.alpha.y = GetPersonY(player.battle.enemy);
+        this.enemy.beta.x = this.enemy.alpha.x-this.alpha.x;
+        this.enemy.beta.y = this.enemy.alpha.y-this.alpha.y;
+        if (Math.abs(this.enemy.beta.x) > Math.abs(this.enemy.beta.y)) {
+            if (this.enemy.beta.x < 0) {
+                this.beta.x = speed/GetPersonSpeedX(player.name)*-1;
+                this.facing = this.direction.west;
+                QueuePersonCommand(player.name, this.facing, true);
+                this.moving = true;
+            } else {
+                this.beta.x = speed/GetPersonSpeedX(player.name);
+                this.facing = this.direction.east;
+                QueuePersonCommand(player.name, this.facing, true);
+                this.moving = true;
+            }
+        } else {
+            if (this.enemy.beta.y < 0) {
+                this.beta.y = speed/GetPersonSpeedY(player.name)*-1;
+                this.facing = this.direction.north;
+                QueuePersonCommand(player.name, this.facing, true);
+                this.moving = true;
+            } else {
+                this.beta.y = speed/GetPersonSpeedY(player.name);
+                this.facing = this.direction.south;
+                QueuePersonCommand(player.name, this.facing, true);
+                this.moving = true;
+            }
+        }
     } else {
 		SetPersonFrame(player.name, 1);
     }
 
     if (this.moving === true && !collision(player.name, this.alpha.x+this.beta.x, this.alpha.y+this.beta.y) && player.inChat === false) {
 		QueuePersonCommand(player.name, COMMAND_ANIMATE, true);
-        SetPersonX(player.name, this.alpha.x+this.beta.x);
-        SetPersonY(player.name, this.alpha.y+this.beta.y);
+        if (player.battle.enemy != '' && this.enemy.alpha.x != false) {
+            SetPersonX(player.name, this.alpha.x+this.beta.x);
+            SetPersonY(player.name, this.alpha.y+this.beta.y);
+        } else {
+            SetPersonX(player.name, this.alpha.x+this.beta.x);
+            SetPersonY(player.name, this.alpha.y+this.beta.y);
+        }
         this.moving = false;
     }
 }
@@ -41,14 +77,31 @@ function movement(speed) {
 function npc_movement(character, speed) {
     this.beta = {x: 0, y: 0};
     this.alpha = {x: GetPersonX(character.name), y: GetPersonY(character.name)};
+    this.enemy = {x: 0, y: 0}
     this.integer = {x: 0, y: 0};
     this.moving = Math.floor(Math.random()*2); //0 = false, 1 = true
-    this.facing = false;;
+    this.facing = false;
     this.direction = [COMMAND_FACE_NORTH, COMMAND_FACE_EAST, COMMAND_FACE_SOUTH, COMMAND_FACE_WEST];
     solid = false;
 
     if (character.in_movement > 0) {
         this.facing = character.direction;
+    } else if (player.battle.enemy == character.name) {
+        this.enemy.x = GetPersonX(player.name)-this.alpha.x;
+        this.enemy.y = GetPersonY(player.name)-this.alpha.y;
+        if (Math.abs(this.enemy.x) > Math.abs(this.enemy.y)) {
+            if (this.enemy.x < 0) {
+                this.facing = 3;
+            } else {
+                this.facing = 1;
+            }
+        } else {
+            if (this.enemy.y < 0) {
+                this.facing = 0;
+            } else {
+                this.facing = 2;
+            }
+        }
     } else {
         this.percentage = 20/(Math.abs(Math.round((this.alpha.x-character.origin_x)/16)) + Math.abs(Math.round((this.alpha.y-character.origin_y)/16))); //Likelihood that NPC will walk towards origin
         this.percentage = 10/(this.percentage*0.1);
@@ -98,8 +151,8 @@ function npc_movement(character, speed) {
         }
     }
 
-    if (character.last_moved == 180 || character.in_movement > 0) {
-        if (this.moving == 1 || character.in_movement > 0) {
+    if (character.last_moved == 180 || character.in_movement > 0 || player.battle.enemy == character.name) {
+        if (this.moving == 1 || character.in_movement > 0 || player.battle.enemy == character.name) {
             switch (this.facing) {
                 case 1: //East
                     this.beta.x = speed/GetPersonSpeedX(character.name);

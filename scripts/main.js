@@ -67,6 +67,10 @@ function update() {
     if (IsKeyPressed(KEY_P)) {
         popup.addPopup('standard', ['Close', 'So how does this work?']);
     }
+
+    if (IsKeyPressed(KEY_E)) {
+        panels.chat.text = battle.sinceEvent;
+    }
     //End block
 
     movement(speed);
@@ -78,6 +82,7 @@ function update() {
 
     battle.setStance();
     battle.isAttacking();
+    battle.sinceEvent++;
 }
 
 function render() {

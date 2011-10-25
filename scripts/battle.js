@@ -2,6 +2,8 @@ function battle() {
     //Do some initalizng here >.<
 }
 
+battle.prototype.sinceEvent = 0;
+
 battle.prototype.setStance = function(initalize) {
     player.weapon = items.indexOf(player.equipment.weapon)+1;
 
@@ -27,12 +29,13 @@ battle.prototype.setStance = function(initalize) {
 }
 
 battle.prototype.isAttacking = function() {
-    //If 3 seconds go by, and nothing combat-related has happened, set player.battle.enemy = '';
     if (IsKeyPressed(KEY_A)) {
-        player.battle.enemy = battle.enemy();
-        //Move persons towards each-other
-        //Stop enemy from moving
-        //Comense combatacle
+        this.sinceEvent = 0;
+        player.battle.enemy = this.enemy();
+        this.attack();
+    }
+    if (this.sinceEvent > 300) {
+        player.battle.enemy = '';
     }
 }
 
