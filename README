@@ -2,6 +2,10 @@ A game made using the Sphere game engine.
 
 Known Bugs:
     Removing popups 1 at a time. Can only remove them all together? (Refer to functions.js)
+        Possible fix, adding a z-index type thing to the popups/links/callbacks/etc
+    Can't remove popups while in a chat with an NPC
+    Doors aren't forgiving enough
+    Side panel (possibly chat panel too) slows down after switching (potentially caused by not undrawing them [or not undrawing something anyways])
 
 Stuff TODO (in order):
     Add a battle system
@@ -26,8 +30,9 @@ Stuff TODO (in order):
     Add a registration/sign-up form (might end up just being a web-page)
 
 Stuff TODO (misc.):
+    Change npc in chat.npc(npc) to a name (i.e. banker) instead of id
     Write something based on getStringWidth that takes into account \n and only calculates the width of the longest line
-    Add styling to text (similar to HTML)
+    Add styling to text (similar to HTML/BBcode)
     Add a screenPercent() function. Where screenPercent(x, 50) would return an int for 50% of the screens width
     Add scrolling to panels.
     Figure out how to give callbacks params. May possibly be able to do something like funcName(addParams()); where addParams is a for loop.
@@ -37,6 +42,5 @@ Stuff TODO (misc.):
     Add skills, and how to level them/how they affect the game
     Come up with a name for the game
     Figure out how magic is going to work
-    Figure out if I can make the game open-source and still make money (figure out how much I should open-source)
     Add a right-click meny for items
     Add picking items up (possibly using the mouse, similar to RS. However, this would possibly require pathing and clicking to move...)

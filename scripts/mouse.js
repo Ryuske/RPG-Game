@@ -5,12 +5,12 @@ mouse.render = function(where) {
 }
 
 mouse.destroy = function() {
-    this.on = "destroyed";
+    this.on = 'destroyed';
     FlipScreen();
 }
 
 mouse.draw = function() {
-    if (this.on != "destroyed") {
+    if (this.on != 'destroyed') {
         this.image.blit(GetMouseX(), GetMouseY());
 
         if (!IsMouseButtonPressed(MOUSE_LEFT)) this.leftButtonDown = false;

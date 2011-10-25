@@ -1,6 +1,6 @@
 /*******************
- * Classes: Refer to Google Docs "Character Information" for a list of available classes
- * Occupations: Refer to Google Docs "Character Information" for a list of available occupations
+ * Classes: Refer to Google Docs 'Character Information' for a list of available classes
+ * Occupations: Refer to Google Docs 'Character Information' for a list of available occupations
  *
  * All weights are in pounds, at the moment
  */
@@ -11,6 +11,13 @@ var player = {
     inChat: false,
     char_class: 'Ninja',
     occupation: 'Blacksmith',
+    battle: {
+        attack: {
+            type: '',
+            stance: ''
+        },
+        enemy: ''
+    },
     emotions: {
         happiness: '100', //Effects combat, if happy and moral is good: stats +; if happy and moral is evil: stats -
         anger: '0', //Effects combat, if moral is good, lower number = greater stats boost; Visa versa for evil moral
@@ -23,7 +30,7 @@ var player = {
     },
     stats: {
         moral: '0', //Negative is evil, positive is good. -100-100
-        infection: 'none', //Refer to Google Docs "Character Information"
+        infection: 'none', //Refer to Google Docs 'Character Information'
         intelligence: '1', //Need to decide how to level this
         charisma: '1', //Need to decide how to level this
         education: '1' //Need to decide how to level this
@@ -160,8 +167,6 @@ var items = [
     }
 ];
 
-var npcs = []; //Refer to npcs.js for explaination on how this array is built
-
 var windowStyle = GetSystemWindowStyle();
 var font = GetSystemFont();
 
@@ -197,9 +202,9 @@ var panels = {
             w: GetScreenWidth()-196,
             h: 68
         },
-        text: "Welcome to some RPG game!"
+        text: 'Welcome to some RPG game!'
     },
-    npcChat: {text: null, chat: null}
+    npcChat: {text: null}
 };
 
 var mouse = {
@@ -215,5 +220,7 @@ var mouse = {
 
 var link; //Link object, defined in play()
 var backpack; //Backpack object, defined in play()
-var popup;
+var chat; //Chat object, defined in play()
+var popup; //Popup object
 var popup_entities;
+var npc; //NPC object

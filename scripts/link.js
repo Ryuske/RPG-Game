@@ -37,7 +37,7 @@ link.prototype.executeLink = function(i) {
         this.dimensions = {w: font.getStringWidth(this.links[i].text), h: font.getHeight()};
     }
     if (GetMouseX() >= this.links[i].x && GetMouseX() <= (this.links[i].x+this.dimensions.w) && GetMouseY() >= this.links[i].y && GetMouseY() <= (this.links[i].y+this.dimensions.h)) {
-        if (typeof(this.links[i].callback) != "function") {
+        if (typeof(this.links[i].callback) != 'function') {
             this.links[i].callback.callback(this.links[i].callback.params); //Need to find a way to have any number of params based on the array
         } else {
             this.links[i].callback();
@@ -47,6 +47,6 @@ link.prototype.executeLink = function(i) {
 
 link.prototype.checkLinks = function() {
     if (mouse.leftClick()) {
-        foreach(this.links, "link.executeLink(i);");
+        foreach(this.links, 'link.executeLink(i);');
     }
 }

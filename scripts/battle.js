@@ -1,52 +1,74 @@
 function battle() {
-    this.variables = {
-        player: {
-            attack: {
-                type: '',
-                stance: ''
-            },
-            weapon: ''
-        }
-    };
+    //Do some initalizng here >.<
 }
 
 battle.prototype.setStance = function(initalize) {
-    this.variables.player.weapon = items.indexOf(player.equipment.weapon)+1;
+    player.weapon = items.indexOf(player.equipment.weapon)+1;
 
-    if (this.variables.player.weapon.char_class == 'Archer') {
-        this.variables.player.attack.type = 'range';
-    } else if (this.variables.player.weapon.char_class == 'Mage') {
-        this.variables.player.attack.type = 'mage';
+    if (player.weapon.char_class == 'Archer') {
+        player.battle.attack.type = 'range';
+    } else if (player.weapon.char_class == 'Mage') {
+        player.battle.attack.type = 'mage';
     } else {
-        this.variables.player.attack.type = 'melee';
+        player.battle.attack.type = 'melee';
     }
 
     if (initalize) {
-        this.variables.player.attack.stance = 'controlled';
+        player.battle.attack.stance = 'controlled';
     } else {
-        if (IsKeyPressed(KEY_1) && this.variables.player.attack.stance != 'controlled') { //Controlled attack
-            this.variables.player.attack.stance = 'controlled';
-            panels.chat.text = "Stance switched to: " + this.variables.player.attack.stance + "\n" + panels.chat.text;
-        } else if (IsKeyPressed(KEY_2) && this.variables.player.attack.stance != 'rapid') { //Rapid attack
-            this.variables.player.attack.stance = 'rapid';
-            panels.chat.text = "Stance switched to: " + this.variables.player.attack.stance + "\n" + panels.chat.text;
-        } else if (IsKeyPressed(KEY_3) && this.variables.player.attack.stance != 'defense') { //Defense attack
-            this.variables.player.attack.stance = 'defense';
-            panels.chat.text = "Stance switched to: " + this.variables.player.attack.stance + "\n" + panels.chat.text;
+        if (IsKeyPressed(KEY_1) && player.battle.attack.stance != 'controlled') { //Controlled attack
+            player.battle.attack.stance = 'controlled';
+        } else if (IsKeyPressed(KEY_2) && player.battle.attack.stance != 'rapid') { //Rapid attack
+            player.battle.attack.stance = 'rapid';
+        } else if (IsKeyPressed(KEY_3) && player.battle.attack.stance != 'defense') { //Defense attack
+            player.battle.attack.stance = 'defense';
         }
     }
 }
 
 battle.prototype.isAttacking = function() {
+    //If 3 seconds go by, and nothing combat-related has happened, set player.battle.enemy = '';
     if (IsKeyPressed(KEY_A)) {
-        popup.addPopup('standard', ['Attack!', 'Type: ' + this.variables.player.attack.type + '; Stance: ' + this.variables.player.attack.stance]);
+        player.battle.enemy = battle.enemy();
+        //Move persons towards each-other
+        //Stop enemy from moving
+        //Comense combatacle
     }
 }
 
-battle.prototype.attackType = function() {
-}
-
 battle.prototype.enemy = function() {
+    switch (GetPersonDirection(player.name)) {
+        case 'north':
+            for (var y=0; y<=50; y++) {
+                if (GetObstructingPerson(player.name, GetPersonX(player.name), GetPersonY(player.name)-y) != '') {
+                    return GetObstructingPerson(player.name, GetPersonX(player.name), GetPersonY(player.name)-y);
+                }
+            }
+            break;
+        case 'east':
+            for (var x=0; x<=50; x++) {
+                if (GetObstructingPerson(player.name, GetPersonX(player.name)+x, GetPersonY(player.name))) {
+                    return GetObstructingPerson(player.name, GetPersonX(player.name)+x, GetPersonY(player.name));
+                }
+            }
+            break;
+        case 'south':
+            for (var y=0; y<=50; y++) {
+                if (GetObstructingPerson(player.name, GetPersonX(player.name), GetPersonY(player.name)+y)) {
+                    return GetObstructingPerson(player.name, GetPersonX(player.name), GetPersonY(player.name)+y);
+                }
+            }
+            break;
+        default: //West
+            for (var x=0; x<=50; x++) {
+                if (GetObstructingPerson(player.name, GetPersonX(player.name)-x, GetPersonY(player.name))) {
+                    return GetObstructingPerson(player.name, GetPersonX(player.name)-x, GetPersonY(player.name));
+                }
+            }
+            break;
+    }
+
+    return '';
 }
 
 battle.prototype.attack = function() {

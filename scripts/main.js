@@ -1,18 +1,18 @@
-RequireSystemScript("menu.js");
-RequireSystemScript("screen.js");
+RequireSystemScript('menu.js');
+RequireSystemScript('screen.js');
 
-RequireScript("link.js");
-RequireScript("functions.js");
-RequireScript("backpack.js");
-RequireScript("menus.js");
-RequireScript("panels.js");
-RequireScript("npcs.js");
-RequireScript("collision.js");
-RequireScript("movement.js");
-RequireScript("chat.js");
-RequireScript("variables.js");
-RequireScript("mouse.js");
-RequireScript("battle.js");
+RequireScript('link.js');
+RequireScript('functions.js');
+RequireScript('backpack.js');
+RequireScript('menus.js');
+RequireScript('panels.js');
+RequireScript('npc.js');
+RequireScript('collision.js');
+RequireScript('movement.js');
+RequireScript('chat.js');
+RequireScript('variables.js');
+RequireScript('mouse.js');
+RequireScript('battle.js');
 
 function game() {
     menuMain();
@@ -23,11 +23,13 @@ function play() {
     SetTalkDistance(31);
     link = new link();
     backpack = new backpack('Plain Backpack');
+    npc = new npc();
+    chat = new chat();
     popup = new popup();
     battle = new battle();
     battle.setStance(true);
 
-	CreatePerson(player.name, "character.rss", false);
+	CreatePerson(player.name, 'character.rss', false);
     AttachCamera(player.name);
 	AttachInput(player.name);
 
@@ -37,7 +39,7 @@ function play() {
 
     SetUpdateScript('update();');
     SetRenderScript('render();');
-    MapEngine("main.rmp", 60);
+    MapEngine('main.rmp', 60);
 }
 
 function update() {
@@ -63,16 +65,16 @@ function update() {
     }
 
     if (IsKeyPressed(KEY_P)) {
-        popup.addPopup('standard', ['Close', "So how does this work?"]);
+        popup.addPopup('standard', ['Close', 'So how does this work?']);
     }
     //End block
 
     movement(speed);
-    foreach(npcs, "\
-        if (npcs[i].movement) {\
-            npc_movement(npcs[i], 1);\
-        }\
-    ");
+    for (var i in npc.list) {
+        if (npc.list[i].movement) {
+            npc_movement(npc.list[i], 1);
+        }
+    }
 
     battle.setStance();
     battle.isAttacking();
@@ -87,7 +89,7 @@ function render() {
         panelGameChat();
     } else {
         panelNpcChat();
-        panels.npcChat.chat.render();
+        chat.links.render();
     }
     link.checkLinks();
     mouse.draw();

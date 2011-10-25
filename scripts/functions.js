@@ -58,17 +58,17 @@ popup.prototype.removePopup = function(popup) {
 }
 
 popup.prototype.render = function() {
-    foreach(popup_entities, "\
+    foreach(popup_entities, '\
             windowStyle.drawWindow(popup_entities[i].window_x, popup_entities[i].window_y, popup_entities[i].w, popup_entities[i].h);\
             font.drawTextBox(popup_entities[i].window_x+popup_entities[i].text_x, popup_entities[i].window_y+popup_entities[i].text_y, font.getStringWidth(popup_entities[i].popup_text), font.getStringHeight(popup_entities[i].popup_text, font.getStringWidth(popup_entities[i].popup_text)), 0, popup_entities[i].popup_text);\
             link.addLink(popup_entities[i].window_x+(popup_entities[i].w-font.getStringWidth(popup_entities[i].closure_text))/2-14.5, popup_entities[i].window_y+popup_entities[i].h-10, popup_entities[i].closure_text, {callback: popup.removePopup, params: i});\
-            ");
+            ');
 }
 
 //From Mozilla's (ECMA-262)
 if (!Array.prototype.indexOf) {
     Array.prototype.indexOf = function(searchElement /*, fromIndex */) {
-        "use strict";
+        'use strict';
         if (this === void 0 || this === null)
             throw new TypeError();
         var t = Object(this);
@@ -100,7 +100,35 @@ if (!Array.prototype.indexOf) {
 
 }
 
-function foreach(object, action) {
+//array = ['value', {test: 'koala'}]; array.fromKey('value').test
+if (!Array.prototype.fromKey) {
+    Array.prototype.fromKey = function(key) {
+        var array = Object(this);
+        if (array.indexOf(key) != -1) {
+            return array[array.indexOf(key)+1];
+        }
+
+        return -1;
+    }
+}
+
+if (!Array.prototype.count) {
+    Array.prototype.count = function(key) {
+        var length = this.length, result = 0;
+        while (length--){
+            if (this[length] == key) {
+                result++;
+            }
+        }
+        return result;
+    }
+}
+
+function foreach(object, variables, action) {
+    if (action === undefined) {
+        action = variables;
+    }
+
     for (var i in object) {
         if (!isNaN(i)) {
             eval(action);

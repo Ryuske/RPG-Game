@@ -4,7 +4,7 @@
 
 function menuMain() {
     this.menu = new Menu();
-    this.menu.addItem("Play", play);
-    this.menu.addItem("Exit", Exit);
+    this.menu.addItem('Play', play);
+    this.menu.addItem('Exit', Exit);
     this.menu.execute(GetScreenWidth()/2-80, GetScreenHeight()/2-40, 160, 80);
 }
