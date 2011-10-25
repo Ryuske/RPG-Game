@@ -218,6 +218,14 @@ var mouse = {
     rightButtonDown: null
 };
 
+var images = {
+    combat: {
+        red: LoadImage('../images/combat/red_splat.jpg'),
+        blue: LoadImage('../images/combat/blue_splat.jpg'),
+        melee_animation: LoadImage('../images/combat/melee_animation.jpg')
+    }
+}
+
 var link; //Link object, defined in play()
 var backpack; //Backpack object, defined in play()
 var chat; //Chat object, defined in play()

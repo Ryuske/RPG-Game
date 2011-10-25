@@ -69,7 +69,7 @@ function update() {
     }
 
     if (IsKeyPressed(KEY_E)) {
-        panels.chat.text = battle.sinceEvent;
+        panels.chat.text = battle.sinceEvent.last + "\n" + battle.sinceEvent.player.attacked + "\n" + battle.sinceEvent.player.hit;
     }
     //End block
 
@@ -82,7 +82,7 @@ function update() {
 
     battle.setStance();
     battle.isAttacking();
-    battle.sinceEvent++;
+    battle.updateEvents();
 }
 
 function render() {
@@ -98,4 +98,12 @@ function render() {
     }
     link.checkLinks();
     mouse.draw();
+    if (player.battle.enemy != '') {
+        if (battle.sinceEvent.player.splat < 60) {
+            battle.draw(battle.draw_type.splat);
+        }
+        if (battle.sinceEvent.player.splat < 15) {
+            battle.draw(battle.draw_type.hit);
+        }
+    }
 }

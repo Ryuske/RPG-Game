@@ -2,7 +2,15 @@ function battle() {
     //Do some initalizng here >.<
 }
 
-battle.prototype.sinceEvent = 0;
+battle.prototype.sinceEvent = {last: 0, player: {attacked: 0, splat: 0}};
+battle.prototype.draw_type = {splat: '', hit: ''};
+battle.prototype.damage = 0;
+
+battle.prototype.updateEvents = function() {
+    this.sinceEvent.last++;
+    this.sinceEvent.player.attacked++;
+    this.sinceEvent.player.splat++;
+}
 
 battle.prototype.setStance = function(initalize) {
     player.weapon = items.indexOf(player.equipment.weapon)+1;
@@ -30,11 +38,14 @@ battle.prototype.setStance = function(initalize) {
 
 battle.prototype.isAttacking = function() {
     if (IsKeyPressed(KEY_A)) {
-        this.sinceEvent = 0;
+        this.sinceEvent.last = 0;
         player.battle.enemy = this.enemy();
-        this.attack();
+        if (this.sinceEvent.player.attacked > 90) {
+            this.attack();
+            this.sinceEvent.player.attacked = 0;
+        }
     }
-    if (this.sinceEvent > 300) {
+    if (this.sinceEvent.last > 300) {
         player.battle.enemy = '';
     }
 }
@@ -75,4 +86,55 @@ battle.prototype.enemy = function() {
 }
 
 battle.prototype.attack = function() {
+    if (player.battle.attack.type == 'range') {
+    } else if (player.battle.attack.type == 'mage') {
+    } else { //Melee
+        this.damage = Math.floor(Math.random()*10);
+        if (this.damage < 3) {
+            this.sinceEvent.player.splat = 0;
+            this.draw_type.splat = 'miss';
+        } else if (this.damage < 5) {
+            this.sinceEvent.player.splat = 0;
+            this.draw_type.splat = 'heal';
+            npc.list.fromKey(player.battle.enemy).hp = npc.list.fromKey(player.battle.enemy).hp + this.damage;
+        } else { //Hit
+            this.sinceEvent.player.splat = 0;
+            this.draw_type.splat = 'hit';
+            if ((npc.list.fromKey(player.battle.enemy).hp-this.damage) < 0) {
+                this.damage = npc.list.fromKey(player.battle.enemy).hp;
+                npc.list.fromKey(player.battle.enemy).hp = 0;   
+                this.killed(player.battle.enemy);
+                player.battle.enemy = '';
+            } else {
+                this.draw_type.hit = 'melee';
+                npc.list.fromKey(player.battle.enemy).hp = npc.list.fromKey(player.battle.enemy).hp - this.damage;
+            }
+        }
+    }
+}
+
+battle.prototype.draw = function(type) {
+    switch (type) {
+        case 'hit':
+            images.combat.red.blit(MapToScreenX(GetPersonLayer(player.name), GetPersonX(player.battle.enemy)-12), MapToScreenY(GetPersonLayer(player.name), GetPersonY(player.battle.enemy)-24));
+            font.drawTextBox(MapToScreenX(GetPersonLayer(player.name), GetPersonX(player.battle.enemy)-11), MapToScreenY(GetPersonLayer(player.name), GetPersonY(player.battle.enemy)-24), 25, 15, 1, this.damage);
+            break;
+        case 'heal':
+            images.combat.blue.blit(MapToScreenX(GetPersonLayer(player.name), GetPersonX(player.battle.enemy)-12), MapToScreenY(GetPersonLayer(player.name), GetPersonY(player.battle.enemy)-24));
+            font.drawTextBox(MapToScreenX(GetPersonLayer(player.name), GetPersonX(player.battle.enemy)-11), MapToScreenY(GetPersonLayer(player.name), GetPersonY(player.battle.enemy)-24), 25, 15, 1, this.damage);
+            break;
+        case 'miss':
+            images.combat.blue.blit(MapToScreenX(GetPersonLayer(player.name), GetPersonX(player.battle.enemy)-12), MapToScreenY(GetPersonLayer(player.name), GetPersonY(player.battle.enemy)-24));
+            font.drawTextBox(MapToScreenX(GetPersonLayer(player.name), GetPersonX(player.battle.enemy)-10), MapToScreenY(GetPersonLayer(player.name), GetPersonY(player.battle.enemy)-24), 30, 15, 1, 'Miss');
+            break;
+        case 'melee':
+            images.combat.melee_animation.blit(MapToScreenX(GetPersonLayer(player.name), GetPersonX(player.battle.enemy)-3), MapToScreenY(GetPersonLayer(player.name), GetPersonY(player.battle.enemy)-3));
+            break;
+        default:
+            break;
+    }
+}
+
+battle.prototype.killed = function(person) {
+    DestroyPerson(person);
 }

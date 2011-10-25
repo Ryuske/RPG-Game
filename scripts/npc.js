@@ -11,6 +11,7 @@ npc.prototype.add = function(character) {
                         'Kai', {
                             id: 'Kai' + this.list.count('Kai'),
                             name: 'Kai',
+                            hp: 25,
                             movement: true, //If the NPC should move or not
                             origin_x: GetPersonX('Kai'), //Where the NPC starts
                             origin_y: GetPersonY('Kai'), //Same as origin_x

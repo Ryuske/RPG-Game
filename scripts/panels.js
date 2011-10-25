@@ -45,8 +45,8 @@ function switchInfoPanel(to) {
         case 'EQP':
             panels.info.text = 'Weapon: ' + player.equipment.weapon + '\nArmor: ' + player.equipment.armor + '\nAmulet: ' + player.equipment.amulet + '\nRing: ' + player.equipment.ring;
             break;
-        case 'CBT':
-            panels.info.text = 'Enemy: ' + player.battle.enemy + '\n\nAttack Type: ' + player.battle.attack.type + '\nAttack Stance: ' + player.battle.attack.stance;
+        case 'CBT': //Remove HP of enemy for release
+            panels.info.text = 'Enemy: ' + player.battle.enemy + ' | ' + npc.list.fromKey(player.battle.enemy).hp + '\n\nAttack Type: ' + player.battle.attack.type + '\nAttack Stance: ' + player.battle.attack.stance;
             break;
     }
 }

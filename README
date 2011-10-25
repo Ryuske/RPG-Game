@@ -29,6 +29,7 @@ Stuff TODO (in order):
 
     Make a website for the game
     Add a registration/sign-up form (might end up just being a web-page)
+    Write a how-to on how to play (potentially in the form of an in-game tutorial)
 
 Stuff TODO (misc.):
     Change npc in chat.npc(npc) to a name (i.e. banker) instead of id
