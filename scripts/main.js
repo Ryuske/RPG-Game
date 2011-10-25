@@ -105,5 +105,8 @@ function render() {
         if (battle.sinceEvent.player.splat < 15) {
             battle.draw(battle.draw_type.hit);
         }
+        if (battle.draw_type.animation.playing == true) {
+            battle.draw(battle.draw_type.hit);
+        }
     }
 }

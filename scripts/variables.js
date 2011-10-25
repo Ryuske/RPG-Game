@@ -11,6 +11,7 @@ var player = {
     inChat: false,
     char_class: 'Ninja',
     occupation: 'Blacksmith',
+    weapon: '', //Set in battle.js
     battle: {
         attack: {
             type: '',
@@ -55,7 +56,7 @@ var player = {
     },
     backpack: {current_pocket: 'S/E', pockets: ''},
     equipment: {
-        weapon: 'Copper Ninjato',
+        weapon: 'Pine Bow',
         armor: 'Silk Shozoku',
         amulet: 'None',
         ring: 'None',

@@ -34,24 +34,24 @@ function movement(speed) {
         this.enemy.beta.y = this.enemy.alpha.y-this.alpha.y;
         if (Math.abs(this.enemy.beta.x) > Math.abs(this.enemy.beta.y)) {
             if (this.enemy.beta.x < 0) {
-                this.beta.x = speed/GetPersonSpeedX(player.name)*-1;
+                //this.beta.x = speed/GetPersonSpeedX(player.name)*-1;
                 this.facing = this.direction.west;
                 QueuePersonCommand(player.name, this.facing, true);
                 this.moving = true;
             } else {
-                this.beta.x = speed/GetPersonSpeedX(player.name);
+                //this.beta.x = speed/GetPersonSpeedX(player.name);
                 this.facing = this.direction.east;
                 QueuePersonCommand(player.name, this.facing, true);
                 this.moving = true;
             }
         } else {
             if (this.enemy.beta.y < 0) {
-                this.beta.y = speed/GetPersonSpeedY(player.name)*-1;
+                //this.beta.y = speed/GetPersonSpeedY(player.name)*-1;
                 this.facing = this.direction.north;
                 QueuePersonCommand(player.name, this.facing, true);
                 this.moving = true;
             } else {
-                this.beta.y = speed/GetPersonSpeedY(player.name);
+                //this.beta.y = speed/GetPersonSpeedY(player.name);
                 this.facing = this.direction.south;
                 QueuePersonCommand(player.name, this.facing, true);
                 this.moving = true;

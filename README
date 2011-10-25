@@ -7,6 +7,8 @@ Known Bugs:
     Doors aren't forgiving enough
     Side panel (possibly chat panel too) slows down after switching (potentially caused by not undrawing them [or not undrawing something anyways])
     *potential bug* Problems with deciding who is the enemy when multiple people are attacking
+    *potential bug* Might cause problems with more than 1 range or mage animation going at once (i.e. rapid fire)
+    *potential bug* Once multiplayer is added, you won't be able to see anyone except your own attack animations (possibly same issue as the bug above this)
 
 Stuff TODO (in order):
     Add a battle system

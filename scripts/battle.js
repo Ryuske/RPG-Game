@@ -3,7 +3,7 @@ function battle() {
 }
 
 battle.prototype.sinceEvent = {last: 0, player: {attacked: 0, splat: 0}};
-battle.prototype.draw_type = {splat: '', hit: ''};
+battle.prototype.draw_type = {splat: '', hit: '', animation: {playing: false, alpha: {x: 0, y: 0}, beta: {x: 0, y: 0}, direction: {x: 0, y: 0}}};
 battle.prototype.damage = 0;
 
 battle.prototype.updateEvents = function() {
@@ -13,7 +13,7 @@ battle.prototype.updateEvents = function() {
 }
 
 battle.prototype.setStance = function(initalize) {
-    player.weapon = items.indexOf(player.equipment.weapon)+1;
+    player.weapon = items[items.indexOf(player.equipment.weapon)+1];
 
     if (player.weapon.char_class == 'Archer') {
         player.battle.attack.type = 'range';
@@ -46,7 +46,7 @@ battle.prototype.isAttacking = function() {
         }
     }
     if (this.sinceEvent.last > 300) {
-        player.battle.enemy = '';
+        //player.battle.enemy = '';
     }
 }
 
@@ -87,6 +87,14 @@ battle.prototype.enemy = function() {
 
 battle.prototype.attack = function() {
     if (player.battle.attack.type == 'range') {
+        this.draw_type.hit = 'range';
+        if (this.draw_type.animation.playing == false) {
+            this.draw_type.animation.alpha.x = MapToScreenX(GetPersonLayer(player.name), GetPersonX(player.name));
+            this.draw_type.animation.beta.x = this.draw_type.animation.alpha.x;
+            this.draw_type.animation.alpha.y = MapToScreenY(GetPersonLayer(player.name), GetPersonY(player.name));
+            this.draw_type.animation.beta.y = this.draw_type.animation.alpha.y;
+        }
+        this.draw_type.animation.playing = true;
     } else if (player.battle.attack.type == 'mage') {
     } else { //Melee
         this.damage = Math.floor(Math.random()*10);
@@ -130,6 +138,28 @@ battle.prototype.draw = function(type) {
         case 'melee':
             images.combat.melee_animation.blit(MapToScreenX(GetPersonLayer(player.name), GetPersonX(player.battle.enemy)-3), MapToScreenY(GetPersonLayer(player.name), GetPersonY(player.battle.enemy)-3));
             break;
+        case 'range':
+            this.draw_type.animation.direction.x = MapToScreenX(GetPersonLayer(player.name), GetPersonX(player.battle.enemy)) - this.draw_type.animation.beta.x;
+            this.draw_type.animation.direction.y = MapToScreenY(GetPersonLayer(player.name), GetPersonY(player.battle.enemy)) - this.draw_type.animation.beta.y;
+            if (Math.abs(this.draw_type.animation.direction.x) > Math.abs(this.draw_type.animation.direction.y)) {
+                if (this.draw_type.animation.direction.x < 0) {
+                    this.draw_type.animation.beta.x--; //West
+                } else {
+                    this.draw_type.animation.beta.x++; //East
+                }
+            } else {
+                if (this.draw_type.animation.direction.y < 0) {
+                    //panels.info.text = 'North';
+                    this.draw_type.animation.beta.y--; //North
+                } else {
+                    this.draw_type.animation.beta.y++; //South
+                }
+            }
+            images.combat.melee_animation.blit(this.draw_type.animation.beta.x, this.draw_type.animation.beta.y);
+            panels.chat.text = "Alpha: " + this.draw_type.animation.alpha.x + ", " + this.draw_type.animation.alpha.y + "\nBeta: " + this.draw_type.animation.beta.    x + ", " + this.draw_type.animation.beta.y + "\nDirection: " + this.draw_type.animation.direction.x + ", " + this.draw_type.animation.direction.y;
+            if ((this.draw_type.animation.direction.x-7) <= 0 && 0 <= (this.draw_type.animation.direction.x+7) && (this.draw_type.animation.direction.y-7) <= 0 && 0 <= (this.draw_type.animation.direction.y+7)) {
+                this.draw_type.animation.playing = false;
+            }
         default:
             break;
     }
