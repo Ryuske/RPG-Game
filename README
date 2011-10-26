@@ -1,7 +1,7 @@
 A game made using the Sphere game engine.
 
 Known Bugs:
-    Removing popups 1 at a time. Can only remove them all together? (Refer to functions.js)
+    Removing popups 1 at a time. Can only remove them all together? (Refer to functions.js); Potentially by adding an array id to the close link instead of just push/popping
         Possible fix, adding a z-index type thing to the popups/links/callbacks/etc
     Can't remove popups while in a chat with an NPC
     Doors aren't forgiving enough
@@ -45,7 +45,7 @@ Stuff TODO (misc.):
     Figure out how stats are leveled
     Add skills, and how to level them/how they affect the game
     Come up with a name for the game
-    Figure out how magic is going to work
+    Figure out how magic is going to work (spell books, etc)
     Add a right-click meny for items
     Add picking items up (possibly using the mouse, similar to RS. However, this would possibly require pathing and clicking to move...)
     Covert everything to proper OOP (or, as close as I can get with JS)

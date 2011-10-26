@@ -5,6 +5,7 @@
  * All weights are in pounds, at the moment
  */
 var player = {
+    layer: '', //Layer of the map that the player is on. Set anytime the map changes
     name: 'Ryuske',
     gender: 'Male',
     weight: '155',
@@ -56,7 +57,7 @@ var player = {
     },
     backpack: {current_pocket: 'S/E', pockets: ''},
     equipment: {
-        weapon: 'Pine Bow',
+        weapon: 'Copper Ninjato',
         armor: 'Silk Shozoku',
         amulet: 'None',
         ring: 'None',
@@ -224,9 +225,10 @@ var images = {
         red: LoadImage('../images/combat/red_splat.jpg'),
         blue: LoadImage('../images/combat/blue_splat.jpg'),
         melee_animation: LoadImage('../images/combat/melee_animation.jpg'),
-        range_animation: LoadImage('../images/combat/range_animation.jpg')
+        range_animation: LoadImage('../images/combat/range_animation.jpg'),
+        mage_animation: LoadImage('../images/combat/mage_animation.png')
     }
-}
+};
 
 var link; //Link object, defined in play()
 var backpack; //Backpack object, defined in play()

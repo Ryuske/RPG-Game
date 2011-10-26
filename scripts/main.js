@@ -40,6 +40,7 @@ function play() {
     SetUpdateScript('update();');
     SetRenderScript('render();');
     MapEngine('main.rmp', 60);
+    player.layer = player.name;
 }
 
 function update() {

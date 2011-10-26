@@ -12,6 +12,7 @@ function WarpMap(map, x, y) {
     UpdateMapEngine();
     RenderMap();
     FadeIn(500);
+    player.layer = GetPersonLayer(player.name);
 }
 
 function recover(type, amount) {
